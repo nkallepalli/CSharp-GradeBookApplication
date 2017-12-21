@@ -1,7 +1,7 @@
 ﻿using System;
 namespace GradeBook.Enums
 {
-    public enum GradeBookType
+    public class GradeBookType
     {
     }
 }
