@@ -23,41 +23,41 @@ namespace GradeBookTests
         /// <summary>
         ///     Tests all requirements for creating the `GradeBookType` enum.
         /// </summary>
-        [Fact(DisplayName = "Create GradeBookType enum @create-a-new-enum-gradebooktype")]
+        [Fact(DisplayName = "Create GradeBookType enum")]
         [Trait("Category", "CreateGradeBookTypeEnum")]
         public void GradeBookTypeEnumTest()
         {
             // Test to make sure `GradeBookType.cs` is in the `Enums` directory.
             var filePath = ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + "GradeBook" + Path.DirectorySeparatorChar + "Enums" + Path.DirectorySeparatorChar + "GradeBookType.cs";
-            Assert.True(File.Exists(filePath), "`GradeBookType.cs` was not found in the `Enums` folder.");
+            Assert.True(File.Exists(filePath), "`GradeBookType.cs` was not found in the `Enums` folder. @create-a-new-enum-gradebooktype");
 
             // Test to make sure the enum `GradeBookType` exists in the `GradeBooks.Enums` namespace.
             var gradebookEnum = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
                                  from type in assembly.GetTypes()
                                  where type.FullName == "GradeBook.Enums.GradeBookType"
                                  select type).FirstOrDefault();
-            Assert.True(gradebookEnum != null, "`GradeBook.Enums.GradeBookType` wasn't found in the `GradeBooks.Enums` namespace.");
+            Assert.True(gradebookEnum != null, "`GradeBook.Enums.GradeBookType` wasn't found in the `GradeBooks.Enums` namespace. @create-a-new-enum-gradebooktype");
 
             // Test to make sure the enum `GradeBookType` is public.
-            Assert.True(gradebookEnum.IsPublic, "`GradeBook.Enums.GradeBookType` exists, but isn't `public`.");
+            Assert.True(gradebookEnum.IsPublic, "`GradeBook.Enums.GradeBookType` exists, but isn't `public`. @create-a-new-enum-gradebooktype");
 
             // Test to make sure that `GradeBookType` is an enum not a class
-            Assert.True(gradebookEnum.IsEnum, "`GradeBook.Enums.GradeBookType` exists, but isn't an enum.");
+            Assert.True(gradebookEnum.IsEnum, "`GradeBook.Enums.GradeBookType` exists, but isn't an enum. @create-a-new-enum-gradebooktype");
 
             // Test that `GradeBookType` contains the value `Standard`
-            Assert.True(Enum.IsDefined(gradebookEnum, "Standard"), "`GradeBook.Enums.GradeBookType` doesn't contain the value `Standard`.");
+            Assert.True(Enum.IsDefined(gradebookEnum, "Standard"), "`GradeBook.Enums.GradeBookType` doesn't contain the value `Standard`. @create-a-new-enum-gradebooktype");
 
             // Test that `GradeBookType` contains the value `Ranked`
-            Assert.True(Enum.IsDefined(gradebookEnum, "Ranked"), "`GradeBook.Enums.GradeBookType` doesn't contain the value `Ranked`.");
+            Assert.True(Enum.IsDefined(gradebookEnum, "Ranked"), "`GradeBook.Enums.GradeBookType` doesn't contain the value `Ranked`. @create-a-new-enum-gradebooktype");
 
             // Test that `GradeBookType` contains the value `ESNU`
-            Assert.True(Enum.IsDefined(gradebookEnum, "ESNU"), "`GradeBook.Enums.GradeBookType` doesn't contain the value `ESNU`.");
+            Assert.True(Enum.IsDefined(gradebookEnum, "ESNU"), "`GradeBook.Enums.GradeBookType` doesn't contain the value `ESNU`. @create-a-new-enum-gradebooktype");
 
             // Test that `GradeBookType` contains the value `OneToFour`
-            Assert.True(Enum.IsDefined(gradebookEnum, "OneToFour"), "`GradeBook.Enums.GradeBookType` doesn't contain the value `OneToFour`.");
+            Assert.True(Enum.IsDefined(gradebookEnum, "OneToFour"), "`GradeBook.Enums.GradeBookType` doesn't contain the value `OneToFour`. @create-a-new-enum-gradebooktype");
 
             // Test that `GradeBookType` contains the value `SixPoint`
-            Assert.True(Enum.IsDefined(gradebookEnum, "SixPoint"), "`GradeBook.Enums.GradeBookType` doesn't contain the value `SixPoint`.");
+            Assert.True(Enum.IsDefined(gradebookEnum, "SixPoint"), "`GradeBook.Enums.GradeBookType` doesn't contain the value `SixPoint`. @create-a-new-enum-gradebooktype");
         }
 
         /// <summary>
