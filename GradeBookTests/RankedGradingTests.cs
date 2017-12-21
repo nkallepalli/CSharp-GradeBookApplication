@@ -63,7 +63,7 @@ namespace GradeBookTests
         /// <summary>
         ///     Tests all requirements for adding the `Type` property.
         /// </summary>
-        [Fact(DisplayName = "Add Type property to BaseGradeBook  @add-a-gradebooktype-property-to-basegradebook")]
+        [Fact(DisplayName = "Add Type property to BaseGradeBook @add-a-gradebooktype-property-to-basegradebook")]
         [Trait("Category", "AddTypeProperty")]
         public void AddTypePropertyTest()
         {
@@ -90,7 +90,7 @@ namespace GradeBookTests
         /// <summary>
         ///     Tests all requirements for creating the `StandardGradeBook` class.
         /// </summary>
-        [Fact(DisplayName = "Create the StandardGradeBook class @create-the-standardgradebook-class")]
+        [Fact(DisplayName = "Create the StandardGradeBook class @create-the-standardgradebook-class @update-standardgradebook-type @update-standardgradebook-constructor")]
         [Trait("Category", "CreateStandardGradeBook")]
         public void CreateStandardGradeBookTest()
         {
