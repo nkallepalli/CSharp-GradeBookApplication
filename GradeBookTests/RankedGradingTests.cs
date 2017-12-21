@@ -90,7 +90,7 @@ namespace GradeBookTests
         /// <summary>
         ///     Tests all requirements for creating the `StandardGradeBook` class.
         /// </summary>
-        [Fact(DisplayName = "Create the StandardGradeBook class @create-the-standardgradebook-class @update-standardgradebook-type @update-standardgradebook-constructor")]
+        [Fact(DisplayName = "Create the StandardGradeBook class @create-the-standardgradebook-class")]
         [Trait("Category", "CreateStandardGradeBook")]
         public void CreateStandardGradeBookTest()
         {
