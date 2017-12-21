@@ -113,7 +113,7 @@ namespace GradeBookTests
 
             // Test if `StandardGradeBook`'s constructor has the proper signature (consider both this task and later signature)
             var ctor = standardGradeBook.GetConstructors().FirstOrDefault();
-            Assert.True(ctor != null, "No constructor found for GradeBook.GradeBooks.StardardGradeBook.");
+            Assert.True(ctor != null, "No constructor found for `GradeBook.GradeBooks.StardardGradeBook`.");
 
             var parameters = ctor.GetParameters();
             object gradeBook = null;
@@ -121,7 +121,7 @@ namespace GradeBookTests
                 gradeBook = Activator.CreateInstance(standardGradeBook, "LoadTest", true);
             else if (parameters.Count() == 1 && parameters[0].ParameterType == typeof(string))
                 gradeBook = Activator.CreateInstance(standardGradeBook, "LoadTest");
-            Assert.True(gradeBook != null, "The constructor for GradeBook.GradeBooks.StandardGradeBook have the expected parameters.");
+            Assert.True(gradeBook != null, "The constructor for `GradeBook.GradeBooks.StandardGradeBook` have the expected parameters.");
 
             // Test if `Type` is set to `GradeBookType.Standard`.
             var gradebookEnum = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
