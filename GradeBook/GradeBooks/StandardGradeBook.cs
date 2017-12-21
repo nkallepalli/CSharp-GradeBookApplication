@@ -1,7 +1,7 @@
 ﻿using System;
 namespace GradeBook.GradeBooks
 {
-    class StandardGradeBook
+    public class StandardGradeBook
     {
     }
 }
