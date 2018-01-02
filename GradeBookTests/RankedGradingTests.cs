@@ -231,9 +231,9 @@ namespace GradeBookTests
 
             var actual = BaseGradeBook.Load("LoadTest");
             File.Delete("LoadTest.gdbk");
-            Assert.True((string)actual.GetType().GetProperty("Name").GetValue(gradeBook) == "LoadTest", "`GradeBook.GradeBooks.BaseGradeBook.Load` did not properly load when the gradebook is a `StandardGradeBook`.");
-            Assert.True(actual.GetType() == standardGradeBook, "`GradeBook.GradeBooks.BaseGradeBook.Load` did not properly create a `StandardGradeBook` when the loaded gradebook is a `StandardGradeBook`.");
-            Assert.True(actual.GetType().GetProperty("Type").GetValue(actual).ToString() == Enum.Parse(gradebookEnum, "Standard", true).ToString(), "`GradeBook.GradeBooks.BaseGradeBook.Load` did not properly set the `Type` property of gradebook to `Standard` when the gradebook is a `StandardGradeBook`.");
+            Assert.True((string)actual.GetType().GetProperty("Name").GetValue(gradeBook) == "LoadTest", "`GradeBook.GradeBooks.BaseGradeBook.Load` did not properly load when the gradebook is a `StandardGradeBook`. @get-gradebooktype");
+            Assert.True(actual.GetType() == standardGradeBook, "`GradeBook.GradeBooks.BaseGradeBook.Load` did not properly create a `StandardGradeBook` when the loaded gradebook is a `StandardGradeBook`. @instantiate-standardgradebook");
+            Assert.True(actual.GetType().GetProperty("Type").GetValue(actual).ToString() == Enum.Parse(gradebookEnum, "Standard", true).ToString(), "`GradeBook.GradeBooks.BaseGradeBook.Load` did not properly set the `Type` property of gradebook to `Standard` when the gradebook is a `StandardGradeBook`. @instantiate-standardgradebook");
 
             // Test if when the `GradeBookType` isn't set the matching `StandardGradeBook` object is returned.
             var esnuGradeBook = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
@@ -249,9 +249,9 @@ namespace GradeBookTests
                     gradeBook = Activator.CreateInstance(standardGradeBook, "LoadTest", true);
                 else if (parameters.Count() == 1 && parameters[0].ParameterType == typeof(string))
                     gradeBook = Activator.CreateInstance(standardGradeBook, "LoadTest");
-                Assert.True(gradeBook != null, "The constructor for `GradeBook.GradeBooks.StandardGradeBook` doesn't have the expected parameters.");
+                Assert.True(gradeBook != null, "The constructor for `GradeBook.GradeBooks.StandardGradeBook` doesn't have the expected parameters. @handle-invalid-types");
 
-                Assert.True(gradeBook.GetType().GetProperty("Type") != null, "`GradeBook.GradeBooks.BaseGradeBook` doesn't appear to have a `Type` property.");
+                Assert.True(gradeBook.GetType().GetProperty("Type") != null, "`GradeBook.GradeBooks.BaseGradeBook` doesn't appear to have a `Type` property. @handle-invalid-types");
                 gradeBook.GetType().GetProperty("Type").SetValue(gradeBook, Enum.Parse(gradebookEnum, "ESNU", true));
 
 
@@ -268,18 +268,18 @@ namespace GradeBookTests
                 }
                 catch (Exception ex)
                 {
-                    Assert.True(ex != null, "Test for GradeBook.GradeBooks.BaseGradeBook.Load was unable to run. This is likely due to issues being able to read/write gradebook files to the local file system.");
+                    Assert.True(ex != null, "Test for GradeBook.GradeBooks.BaseGradeBook.Load was unable to run. This is likely due to issues being able to read/write gradebook files to the local file system. @handle-invalid-types");
                 }
          
                 try
                 {
                     BaseGradeBook.Load("LoadTest");
-                    Assert.True(1 == 1, "`GradeBook.GradeBooks.BaseGradeBook.Load` didn't throw an `InvalidOperationException` when the `GradeBookType` was not yet implimented.");
+                    Assert.True(1 == 1, "`GradeBook.GradeBooks.BaseGradeBook.Load` didn't throw an `InvalidOperationException` when the `GradeBookType` was not yet implimented. @handle-invalid-types");
                 }
                 catch (Exception ex)
                 {
-                    Assert.True(ex.GetType() == typeof(InvalidOperationException), "`GradeBook.GradeBooks.BaseGradeBook.Load` threw an exception, however; it was not an `InvalidOperationException`.");
-                    Assert.True(ex.Message == "The gradebook you've attempted to load is not in a supported type of gradebook.", "`GradeBook.GradeBooks.BaseGradeBook`'s `Load` method threw the proper exception type, but didn't have the message \"The gradebook you've attempted to load is not in a supported type of gradebook.\"");
+                    Assert.True(ex.GetType() == typeof(InvalidOperationException), "`GradeBook.GradeBooks.BaseGradeBook.Load` threw an exception, however; it was not an `InvalidOperationException` @handle-invalid-types.");
+                    Assert.True(ex.Message == "The gradebook you've attempted to load is not in a supported type of gradebook.", "`GradeBook.GradeBooks.BaseGradeBook`'s `Load` method threw the proper exception type, but didn't have the message \"The gradebook you've attempted to load is not in a supported type of gradebook.\" @handle-invalid-types");
                 }
                 File.Delete("LoadTest.gdbk");
             }
@@ -289,10 +289,10 @@ namespace GradeBookTests
                                      from type in assembly.GetTypes()
                                      where type.Name == "RankedGradeBook"
                                      select type).FirstOrDefault();
-            Assert.True(rankedGradeBook != null, "`GradeBook.GradeBooks.RankedGradeBook` doesn't exist.");
+            Assert.True(rankedGradeBook != null, "`GradeBook.GradeBooks.RankedGradeBook` doesn't exist. @instantiate-rankedgradebook");
 
             ctor = rankedGradeBook.GetConstructors().FirstOrDefault();
-            Assert.True(ctor != null, "`GradeBook.GradeBooks.RankedGradeBook` doesn't appear to have a constructor.");
+            Assert.True(ctor != null, "`GradeBook.GradeBooks.RankedGradeBook` doesn't appear to have a constructor. @instantiate-rankedgradebook");
 
             parameters = ctor.GetParameters();
             gradeBook = null;
@@ -300,7 +300,7 @@ namespace GradeBookTests
                 gradeBook = Activator.CreateInstance(rankedGradeBook, "LoadTest", true);
             else if (parameters.Count() == 1 && parameters[0].ParameterType == typeof(string))
                 gradeBook = Activator.CreateInstance(rankedGradeBook, "LoadTest");
-            Assert.True(gradeBook != null, "The constructor for `GradeBook.GradeBooks.RankedGradeBook` doesn't have the expected parameters.");
+            Assert.True(gradeBook != null, "The constructor for `GradeBook.GradeBooks.RankedGradeBook` doesn't have the expected parameters. @instantiate-rankedgradebook");
 
             gradeBook.GetType().GetProperty("Type").SetValue(gradeBook, Enum.Parse(gradebookEnum, "Ranked", true));
 
@@ -317,20 +317,20 @@ namespace GradeBookTests
             }
             catch (Exception ex)
             {
-                Assert.True(ex != null, "Test for GradeBook.GradeBooks.BaseGradeBook.Load was unable to run. This is likely due to issues being able to read/write gradebook files to the local file system.");
+                Assert.True(ex != null, "Test for GradeBook.GradeBooks.BaseGradeBook.Load was unable to run. This is likely due to issues being able to read/write gradebook files to the local file system. @instantiate-rankedgradebook");
             }
 
             actual = BaseGradeBook.Load("LoadTest");
             File.Delete("LoadTest.gdbk");
-            Assert.True((string)actual.GetType().GetProperty("Name").GetValue(gradeBook) == "LoadTest", "`GradeBook.GradeBooks.BaseGradeBook.Load` did not properly load when the gradebook is a `RankedGradeBook`.");
-            Assert.True(actual.GetType() == rankedGradeBook, "`GradeBook.GradeBooks.BaseGradeBook.Load` did not properly create a `RankedGradeBook` when the loaded gradebook is a `RankedGradeBook`.");
-            Assert.True(actual.GetType().GetProperty("Type").GetValue(actual).ToString() == Enum.Parse(gradebookEnum, "Ranked", true).ToString(), "`GradeBook.GradeBooks.BaseGradeBook.Load` did not properly set the `Type` property of gradebook to `Ranked` when the gradebook is a `RankedGradeBook`.");
+            Assert.True((string)actual.GetType().GetProperty("Name").GetValue(gradeBook) == "LoadTest", "`GradeBook.GradeBooks.BaseGradeBook.Load` did not properly load when the gradebook is a `RankedGradeBook`. @instantiate-rankedgradebook @update-loads-return");
+            Assert.True(actual.GetType() == rankedGradeBook, "`GradeBook.GradeBooks.BaseGradeBook.Load` did not properly create a `RankedGradeBook` when the loaded gradebook is a `RankedGradeBook`. @instantiate-rankedgradebook @update-loads-return");
+            Assert.True(actual.GetType().GetProperty("Type").GetValue(actual).ToString() == Enum.Parse(gradebookEnum, "Ranked", true).ToString(), "`GradeBook.GradeBooks.BaseGradeBook.Load` did not properly set the `Type` property of gradebook to `Ranked` when the gradebook is a `RankedGradeBook`. @instantiate-rankedgradebook");
         }
 
         /// <summary>
         ///     Tests all functionality related to overriding `LetterGrade`.
         /// </summary>
-        [Fact(DisplayName = "Add multiple GradeBookType support to BaseGradeBook @override-rankedgradebook-s-getlettergrade")]
+        [Fact(DisplayName = "Add multiple GradeBookType support to BaseGradeBook")]
         [Trait("Category","OverrideGetLetterGrade")]
         public void OverrideGetLetterGradeTest()
         {
@@ -339,10 +339,10 @@ namespace GradeBookTests
                                    from type in assembly.GetTypes()
                                    where type.Name == "RankedGradeBook"
                                    select type).FirstOrDefault();
-            Assert.True(rankedGradeBook != null, "GradeBook.GradeBooks.RankedGradeBook doesn't exist.");
+            Assert.True(rankedGradeBook != null, "GradeBook.GradeBooks.RankedGradeBook doesn't exist. @override-rankedgradebook-s-getlettergrade");
 
             var ctor = rankedGradeBook.GetConstructors().FirstOrDefault();
-            Assert.True(ctor != null, "No constructor found for GradeBook.GradeBooks.RankedGradeBook.");
+            Assert.True(ctor != null, "No constructor found for GradeBook.GradeBooks.RankedGradeBook. @override-rankedgradebook-s-getlettergrade");
 
             var parameters = ctor.GetParameters();
             object gradeBook = null;
@@ -350,13 +350,13 @@ namespace GradeBookTests
                 gradeBook = Activator.CreateInstance(rankedGradeBook, "Test GradeBook", true);
             else if (parameters.Count() == 1 && parameters[0].ParameterType == typeof(string))
                 gradeBook = Activator.CreateInstance(rankedGradeBook, "Test GradeBook");
-            Assert.True(gradeBook != null, "The constructor for GradeBook.GradeBooks.RankedGradeBook have the expected parameters.");
+            Assert.True(gradeBook != null, "The constructor for GradeBook.GradeBooks.RankedGradeBook have the expected parameters. @override-rankedgradebook-s-getlettergrade");
 
             MethodInfo method = rankedGradeBook.GetMethod("GetLetterGrade");
 
             //Test if exception is thrown when there are less than 5 students.
             var exception = Record.Exception(() => method.Invoke(gradeBook, new object[] { 100 }));
-            Assert.True(exception != null, "`GradeBook.GradeBooks.RankedGradeBook.GetLetterGrade` didn't throw an exception when less than 5 students have grades.");
+            Assert.True(exception != null, "`GradeBook.GradeBooks.RankedGradeBook.GetLetterGrade` didn't throw an exception when less than 5 students have grades. @override-getlettergrade-error");
 
             //Setup successful conditions
             var students = new List<Student>
@@ -386,25 +386,25 @@ namespace GradeBookTests
             gradeBook.GetType().GetProperty("Students").SetValue(gradeBook, students);
 
             //Test if A is given when input grade is in the top 20%.
-            Assert.True((char)method.Invoke(gradeBook, new object[] { 100 }) == 'A',"`GradeBook.GradeBooks.RankedGradeBook.GetLetterGrade` didn't give an A to students in the top 20% of the class.");
+            Assert.True((char)method.Invoke(gradeBook, new object[] { 100 }) == 'A',"`GradeBook.GradeBooks.RankedGradeBook.GetLetterGrade` didn't give an A to students in the top 20% of the class. @override-getlettergrade-a");
 
             //Test if B is given when input grade is between the top 20 and 40%.
-            Assert.True((char)method.Invoke(gradeBook, new object[] { 75 }) == 'B', "`GradeBook.GradeBooks.RankedGradeBook.GetLetterGrade` didn't give an B to students between the top 20 and 40% of the class.");
+            Assert.True((char)method.Invoke(gradeBook, new object[] { 75 }) == 'B', "`GradeBook.GradeBooks.RankedGradeBook.GetLetterGrade` didn't give an B to students between the top 20 and 40% of the class. @override-getlettergrade-b");
 
             //Test if C is given when input grade is between the top 40 and 60%.
-            Assert.True((char)method.Invoke(gradeBook, new object[] { 50 }) == 'C', "`GradeBook.GradeBooks.RankedGradeBook.GetLetterGrade` didn't give an C to students between the top 40 and 60% of the class.");
+            Assert.True((char)method.Invoke(gradeBook, new object[] { 50 }) == 'C', "`GradeBook.GradeBooks.RankedGradeBook.GetLetterGrade` didn't give an C to students between the top 40 and 60% of the class. @override-getlettergrade-c");
 
             //Test if D is given when input grade is between the top 60 and 80%.
-            Assert.True((char)method.Invoke(gradeBook, new object[] { 25 }) == 'D', "`GradeBook.GradeBooks.RankedGradeBook.GetLetterGrade` didn't give an D to students between the top 60 and 80% of the class.");
+            Assert.True((char)method.Invoke(gradeBook, new object[] { 25 }) == 'D', "`GradeBook.GradeBooks.RankedGradeBook.GetLetterGrade` didn't give an D to students between the top 60 and 80% of the class. @override-getlettergrade-d");
 
             //Test if F is given when input grade is below the top 80%.
-            Assert.True((char)method.Invoke(gradeBook, new object[] { 0 }) == 'F', "`GradeBook.GradeBooks.RankedGradeBook.GetLetterGrade` didn't give an F to students below the top 80% of the class.");
+            Assert.True((char)method.Invoke(gradeBook, new object[] { 0 }) == 'F', "`GradeBook.GradeBooks.RankedGradeBook.GetLetterGrade` didn't give an F to students below the top 80% of the class. @override-getlettergrade-f");
         }
 
         /// <summary>
         ///     Tests all functionality arround overriding `CalculateStatistics`.
         /// </summary>
-        [Fact(DisplayName = "Override CalculateStatistics @override-calculatestatistics")]
+        [Fact(DisplayName = "Override CalculateStatistics")]
         [Trait("Category","OverrideCalculateStatistics")]
         public void OverrideCalculateStatisticsTest()
         {
@@ -413,7 +413,7 @@ namespace GradeBookTests
                                    from type in assembly.GetTypes()
                                    where type.FullName == "GradeBook.GradeBooks.RankedGradeBook"
                                    select type).FirstOrDefault();
-            Assert.True(rankedGradeBook != null, "GradeBook.GradeBooks.RankedGradeBook doesn't exist.");
+            Assert.True(rankedGradeBook != null, "GradeBook.GradeBooks.RankedGradeBook doesn't exist. @override-calculatestatistics");
 
             var ctor = rankedGradeBook.GetConstructors().FirstOrDefault();
             Assert.True(ctor != null, "No constructor found for GradeBook.GradeBooks.RankedGradeBook.");
@@ -424,7 +424,7 @@ namespace GradeBookTests
                 gradeBook = Activator.CreateInstance(rankedGradeBook, "Test GradeBook", true);
             else if (parameters.Count() == 1 && parameters[0].ParameterType == typeof(string))
                 gradeBook = Activator.CreateInstance(rankedGradeBook, "Test GradeBook");
-            Assert.True(gradeBook != null, "The constructor for GradeBook.GradeBooks.RankedGradeBook have the expected parameters.");
+            Assert.True(gradeBook != null, "The constructor for GradeBook.GradeBooks.RankedGradeBook have the expected parameters. @override-calculatestatistics");
 
             MethodInfo method = rankedGradeBook.GetMethod("CalculateStatistics");
             var output = string.Empty;
@@ -440,10 +440,10 @@ namespace GradeBookTests
             StreamWriter standardOutput = new StreamWriter(Console.OpenStandardOutput());
             Console.SetOut(standardOutput);
 
-            Assert.True(output.Contains("5 students") || output.Contains("five students"), "`GradeBook.GradeBooks.RankedGradeBook.CalculateStatistics` didn't respond with 'Ranked grading requires at least 5 students.' when there were less than 5 students.");
+            Assert.True(output.Contains("5 students") || output.Contains("five students"), "`GradeBook.GradeBooks.RankedGradeBook.CalculateStatistics` didn't respond with 'Ranked grading requires at least 5 students.' when there were less than 5 students. @calculatestatistics-error");
 
             //Test that the base calculate statistics didn't still run when there were less than 5 students.
-            Assert.True(!output.Contains("average grade of all students is"), "`GradeBook.GradeBooks.RankedGradeBook.CalculateStastics` still ran the base `CalculateStatistics` when there was less than 5 students.");
+            Assert.True(!output.Contains("average grade of all students is"), "`GradeBook.GradeBooks.RankedGradeBook.CalculateStastics` still ran the base `CalculateStatistics` when there was less than 5 students. @calculatestatistics-error");
 
             //Test that the base calculate statistics did run when there were 5 or more students.
             output = string.Empty;
@@ -484,13 +484,13 @@ namespace GradeBookTests
             standardOutput = new StreamWriter(Console.OpenStandardOutput());
             Console.SetOut(standardOutput);
 
-            Assert.True(output.Contains("average grade of all students is"), "`GradeBook.GradeBooks.RankedGradeBook.CalculateStastics` did not run the base `CalculateStatistics` when there was 5 or more students.");
+            Assert.True(output.Contains("average grade of all students is"), "`GradeBook.GradeBooks.RankedGradeBook.CalculateStastics` did not run the base `CalculateStatistics` when there was 5 or more students. @calculatestatistics-call-base");
         }
 
         /// <summary>
         ///     Tests all functionality related to overriding `CalculateStudentStatistics`.
         /// </summary>
-        [Fact(DisplayName = "Override CalculateStudentsStatistics @override-calculatestudentstatistics")]
+        [Fact(DisplayName = "Override CalculateStudentsStatistics")]
         [Trait("Category", "OverrideCalculateStudentStatistics")]
         public void OverrideCalculateStudentStatisticsTest()
         {
@@ -499,10 +499,10 @@ namespace GradeBookTests
                                    from type in assembly.GetTypes()
                                    where type.FullName == "GradeBook.GradeBooks.RankedGradeBook"
                                    select type).FirstOrDefault();
-            Assert.True(rankedGradeBook != null, "GradeBook.GradeBooks.RankedGradeBook doesn't exist.");
+            Assert.True(rankedGradeBook != null, "GradeBook.GradeBooks.RankedGradeBook doesn't exist. @override-calculatestudentstatistics");
 
             var ctor = rankedGradeBook.GetConstructors().FirstOrDefault();
-            Assert.True(ctor != null, "No constructor found for GradeBook.GradeBooks.RankedGradeBook.");
+            Assert.True(ctor != null, "No constructor found for GradeBook.GradeBooks.RankedGradeBook. @override-calculatestudentstatistics");
 
             var parameters = ctor.GetParameters();
             object gradeBook = null;
@@ -510,7 +510,7 @@ namespace GradeBookTests
                 gradeBook = Activator.CreateInstance(rankedGradeBook, "Test GradeBook", true);
             else if (parameters.Count() == 1 && parameters[0].ParameterType == typeof(string))
                 gradeBook = Activator.CreateInstance(rankedGradeBook, "Test GradeBook");
-            Assert.True(gradeBook != null, "The constructor for GradeBook.GradeBooks.RankedGradeBook have the expected parameters.");
+            Assert.True(gradeBook != null, "The constructor for GradeBook.GradeBooks.RankedGradeBook have the expected parameters. @override-calculatestudentstatistics");
 
             MethodInfo method = rankedGradeBook.GetMethod("CalculateStudentStatistics");
             var output = string.Empty;
@@ -536,10 +536,10 @@ namespace GradeBookTests
             StreamWriter standardOutput = new StreamWriter(Console.OpenStandardOutput());
             Console.SetOut(standardOutput);
 
-            Assert.True(output.Contains("5 students") || output.Contains("five students"), "`GradeBook.GradeBooks.RankedGradeBook.CalculateStudentStatistics` didn't respond with 'Ranked grading requires at least 5 students.' when there were less than 5 students.");
+            Assert.True(output.Contains("5 students") || output.Contains("five students"), "`GradeBook.GradeBooks.RankedGradeBook.CalculateStudentStatistics` didn't respond with 'Ranked grading requires at least 5 students.' when there were less than 5 students. @calculatestudentstatistics-error");
 
             //Test that the base calculate statistics didn't still run when there were less than 5 students.
-            Assert.True(!output.Contains("grades:"), "`GradeBook.GradeBooks.RankedGradeBook.CalculateStudentStastics` still ran the base `CalculateStudentStatistics` when there was less than 5 students.");
+            Assert.True(!output.Contains("grades:"), "`GradeBook.GradeBooks.RankedGradeBook.CalculateStudentStastics` still ran the base `CalculateStudentStatistics` when there was less than 5 students. @calculatestudentstatistics-error");
 
             //Test that the base calculate statistics did run when there were 5 or more students.
             output = string.Empty;
@@ -580,14 +580,14 @@ namespace GradeBookTests
             standardOutput = new StreamWriter(Console.OpenStandardOutput());
             Console.SetOut(standardOutput);
 
-            Assert.True(output.Contains("grades:"), "`GradeBook.GradeBooks.RankedGradeBook.CalculateStudentStastics` did not run the base `CalculateStudentStatistics` when there was 5 or more students.");
+            Assert.True(output.Contains("grades:"), "`GradeBook.GradeBooks.RankedGradeBook.CalculateStudentStastics` did not run the base `CalculateStudentStatistics` when there was 5 or more students. @calculatestudentstatistics-calls-base");
         }
 
 
         /// <summary>
         ///     Tests all functionality related to updateding the `CreateCommand` to work with multiple types. WARNING! this test accesses a loop so could potentially get stuck in a loop if there is a problem.
         /// </summary>
-        [Fact(DisplayName = "Update StartingUserInterface's CreateCommand Method @update-startinguserinterface-s-createcommand-method")]
+        [Fact(DisplayName = "Update StartingUserInterface's CreateCommand Method")]
         [Trait("Category","UpdateCreateCommand")]
         public void UpdateCreateCommandTest()
         {
@@ -596,10 +596,10 @@ namespace GradeBookTests
                                    from type in assembly.GetTypes()
                                    where type.FullName == "GradeBook.GradeBooks.RankedGradeBook"
                                    select type).FirstOrDefault();
-            Assert.True(rankedGradeBook != null, "GradeBook.GradeBooks.RankedGradeBook doesn't exist.");
+            Assert.True(rankedGradeBook != null, "GradeBook.GradeBooks.RankedGradeBook doesn't exist. @set-parts-check-to-3");
 
             var ctor = rankedGradeBook.GetConstructors().FirstOrDefault();
-            Assert.True(ctor != null, "No constructor found for GradeBook.GradeBooks.RankedGradeBook.");
+            Assert.True(ctor != null, "No constructor found for GradeBook.GradeBooks.RankedGradeBook. @set-parts-check-to-3");
 
             var parameters = ctor.GetParameters();
             if (parameters.Count() == 2 && parameters[0].ParameterType == typeof(string) && parameters[1].ParameterType == typeof(bool))
@@ -624,13 +624,13 @@ namespace GradeBookTests
             Console.SetIn(standardInput);
 
             //Test that message written to console when parts.length != 3.
-            Assert.True(output.Contains("command not valid"), "`GradeBook.UserInterfaces.StartingUserInterface` didn't write a message to the console when the create command didn't contain both a name and type.");
+            Assert.True(output.Contains("command not valid"), "`GradeBook.UserInterfaces.StartingUserInterface` didn't write a message to the console when the create command didn't contain both a name and type. @createcommand-type-error-message");
 
             //Test that message written to console is correct.
-            Assert.True(output.Contains("command not valid, create requires a name and type of gradebook."), "`GradeBook.UserInterfaces.StartingUserInterface` didn't write 'Command not valid, Create requires a name and type of gradebook.' to the console when the create command didn't contain both a name and type.");
+            Assert.True(output.Contains("command not valid, create requires a name and type of gradebook."), "`GradeBook.UserInterfaces.StartingUserInterface` didn't write 'Command not valid, Create requires a name and type of gradebook.' to the console when the create command didn't contain both a name and type. @createcommand-type-error-message");
 
             //Test that `CreateCommand` escapes returns without setting the gradebook when parts.Length != 3.
-            Assert.True(!output.Contains("created gradebook"), "`GradeBook.UserInterfaces.StartingUserInterface` still created a gradebook when the create command didn't contain both a name and type.");
+            Assert.True(!output.Contains("created gradebook"), "`GradeBook.UserInterfaces.StartingUserInterface` still created a gradebook when the create command didn't contain both a name and type. @set-parts-check-to-3");
 
             //Test that a `StandardGradeBook` is created with the correct name when value is "standard".
             output = string.Empty;
@@ -650,7 +650,7 @@ namespace GradeBookTests
             standardInput = new StreamReader(Console.OpenStandardInput());
             Console.SetIn(standardInput);
 
-            Assert.True(output.Contains("standard"), "`GradeBook.UserInterfaces.StartingUserInterface` didn't create a `StandardGradeBook` when 'standard' was used with the `CreateCommand`.");
+            Assert.True(output.Contains("standard"), "`GradeBook.UserInterfaces.StartingUserInterface` didn't create a `StandardGradeBook` when 'standard' was used with the `CreateCommand`. @basegradebook-uninstantiate @createcommand-type-part @createcommand-instantiate");
 
             //Test that a `RankedGradeBook` is created with the correct name when value is "ranked".
             output = string.Empty;
@@ -670,7 +670,7 @@ namespace GradeBookTests
             standardInput = new StreamReader(Console.OpenStandardInput());
             Console.SetIn(standardInput);
 
-            Assert.True(output.Contains("ranked"), "`GradeBook.UserInterfaces.StartingUserInterface` didn't create a `RankedGradeBook` when 'ranked' was used with the `CreateCommand`.");
+            Assert.True(output.Contains("ranked"), "`GradeBook.UserInterfaces.StartingUserInterface` didn't create a `RankedGradeBook` when 'ranked' was used with the `CreateCommand`. @createcommand-instantiate");
 
             //Test that the correct message is written to console when value isn't handled.
             output = string.Empty;
@@ -684,13 +684,13 @@ namespace GradeBookTests
             standardOutput = new StreamWriter(Console.OpenStandardOutput());
             Console.SetOut(standardOutput);
 
-            Assert.True(output.Contains("incorrect is not a supported type of gradebook, please try again"), "`GradeBook.UserInterfaces.StartingUserInterface` write the entered type followed by ' is not a supported type of gradebook, please try again' when an unknown value was used with the `CreateCommand`.");
+            Assert.True(output.Contains("incorrect is not a supported type of gradebook, please try again"), "`GradeBook.UserInterfaces.StartingUserInterface` write the entered type followed by ' is not a supported type of gradebook, please try again' when an unknown value was used with the `CreateCommand`. @createcommand-instantiate");
         }
 
         /// <summary>
         ///     Tests Help Command update to ensure all changes were made correctly.
         /// </summary>
-        [Fact(DisplayName = "Update StartingUserInterface's HelpCommand Method @update-startinguserinterface-s-helpcommand-method")]
+        [Fact(DisplayName = "Update StartingUserInterface's HelpCommand Method")]
         [Trait("Category","UpdateHelpCommand")]
         public void UpdateHelpCommandTest()
         {
@@ -717,18 +717,18 @@ namespace GradeBookTests
                 return;
 
             // Test if help command message is correct
-            Assert.True(output.Contains("create 'name' 'type' - creates a new gradebook where 'name' is the name of the gradebook and 'type' is what type of grading it should use."), "`GradeBook.UserInterfaces.StartingUserInterface.HelpCommand` didn't write \"Create 'Name' 'Type' - Creates a new gradebook where 'Name' is the name of the gradebook and 'Type' is what type of grading it should use.\"");
+            Assert.True(output.Contains("create 'name' 'type' - creates a new gradebook where 'name' is the name of the gradebook and 'type' is what type of grading it should use."), "`GradeBook.UserInterfaces.StartingUserInterface.HelpCommand` didn't write \"Create 'Name' 'Type' - Creates a new gradebook where 'Name' is the name of the gradebook and 'Type' is what type of grading it should use.\" @update-startinguserinterface-s-helpcommand-method");
         }
 
         /// <summary>
         ///     Tests if `BaseGradeBook` is abstract.
         /// </summary>
-        [Fact(DisplayName = "Make BaseGradeBook Abstract @make-basegradebook-abstract")]
+        [Fact(DisplayName = "Make BaseGradeBook Abstract")]
         [Trait("Category","MakeBaseGradeBookAbstract")]
         public void MakeBaseGradeBookAbstract()
         {
             // Test if `BaseGradeBook` is abstract.
-            Assert.True(typeof(BaseGradeBook).IsAbstract == true, "`GradeBook.GradeBooks.BaseGradeBook` is not abstract.");
+            Assert.True(typeof(BaseGradeBook).IsAbstract == true, "`GradeBook.GradeBooks.BaseGradeBook` is not abstract. @make-basegradebook-abstract");
         }
     }
 }
