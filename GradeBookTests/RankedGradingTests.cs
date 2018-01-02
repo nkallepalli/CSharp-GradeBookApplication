@@ -23,47 +23,47 @@ namespace GradeBookTests
         /// <summary>
         ///     Tests all requirements for creating the `GradeBookType` enum.
         /// </summary>
-        [Fact(DisplayName = "Create GradeBookType enum @create-a-new-enum-gradebooktype")]
+        [Fact(DisplayName = "Create GradeBookType enum")]
         [Trait("Category", "CreateGradeBookTypeEnum")]
         public void GradeBookTypeEnumTest()
         {
             // Test to make sure `GradeBookType.cs` is in the `Enums` directory.
             var filePath = ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + "GradeBook" + Path.DirectorySeparatorChar + "Enums" + Path.DirectorySeparatorChar + "GradeBookType.cs";
-            Assert.True(File.Exists(filePath), "`GradeBookType.cs` was not found in the `Enums` folder.");
+            Assert.True(File.Exists(filePath), "`GradeBookType.cs` was not found in the `Enums` folder. @create-a-new-enum-gradebooktype");
 
             // Test to make sure the enum `GradeBookType` exists in the `GradeBooks.Enums` namespace.
             var gradebookEnum = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
                                  from type in assembly.GetTypes()
                                  where type.FullName == "GradeBook.Enums.GradeBookType"
                                  select type).FirstOrDefault();
-            Assert.True(gradebookEnum != null, "`GradeBook.Enums.GradeBookType` wasn't found in the `GradeBooks.Enums` namespace.");
+            Assert.True(gradebookEnum != null, "`GradeBook.Enums.GradeBookType` wasn't found in the `GradeBooks.Enums` namespace. @create-a-new-enum-gradebooktype");
 
             // Test to make sure the enum `GradeBookType` is public.
-            Assert.True(gradebookEnum.IsPublic, "`GradeBook.Enums.GradeBookType` exists, but isn't `public`.");
+            Assert.True(gradebookEnum.IsPublic, "`GradeBook.Enums.GradeBookType` exists, but isn't `public`. @create-a-new-enum-gradebooktype");
 
             // Test to make sure that `GradeBookType` is an enum not a class
-            Assert.True(gradebookEnum.IsEnum, "`GradeBook.Enums.GradeBookType` exists, but isn't an enum.");
+            Assert.True(gradebookEnum.IsEnum, "`GradeBook.Enums.GradeBookType` exists, but isn't an enum. @create-a-new-enum-gradebooktype");
 
             // Test that `GradeBookType` contains the value `Standard`
-            Assert.True(Enum.IsDefined(gradebookEnum, "Standard"), "`GradeBook.Enums.GradeBookType` doesn't contain the value `Standard`.");
+            Assert.True(Enum.IsDefined(gradebookEnum, "Standard"), "`GradeBook.Enums.GradeBookType` doesn't contain the value `Standard`. @create-a-new-enum-gradebooktype");
 
             // Test that `GradeBookType` contains the value `Ranked`
-            Assert.True(Enum.IsDefined(gradebookEnum, "Ranked"), "`GradeBook.Enums.GradeBookType` doesn't contain the value `Ranked`.");
+            Assert.True(Enum.IsDefined(gradebookEnum, "Ranked"), "`GradeBook.Enums.GradeBookType` doesn't contain the value `Ranked`. @create-a-new-enum-gradebooktype");
 
             // Test that `GradeBookType` contains the value `ESNU`
-            Assert.True(Enum.IsDefined(gradebookEnum, "ESNU"), "`GradeBook.Enums.GradeBookType` doesn't contain the value `ESNU`.");
+            Assert.True(Enum.IsDefined(gradebookEnum, "ESNU"), "`GradeBook.Enums.GradeBookType` doesn't contain the value `ESNU`. @create-a-new-enum-gradebooktype");
 
             // Test that `GradeBookType` contains the value `OneToFour`
-            Assert.True(Enum.IsDefined(gradebookEnum, "OneToFour"), "`GradeBook.Enums.GradeBookType` doesn't contain the value `OneToFour`.");
+            Assert.True(Enum.IsDefined(gradebookEnum, "OneToFour"), "`GradeBook.Enums.GradeBookType` doesn't contain the value `OneToFour`. @create-a-new-enum-gradebooktype");
 
             // Test that `GradeBookType` contains the value `SixPoint`
-            Assert.True(Enum.IsDefined(gradebookEnum, "SixPoint"), "`GradeBook.Enums.GradeBookType` doesn't contain the value `SixPoint`.");
+            Assert.True(Enum.IsDefined(gradebookEnum, "SixPoint"), "`GradeBook.Enums.GradeBookType` doesn't contain the value `SixPoint`. @create-a-new-enum-gradebooktype");
         }
 
         /// <summary>
         ///     Tests all requirements for adding the `Type` property.
         /// </summary>
-        [Fact(DisplayName = "Add Type property to BaseGradeBook @add-a-gradebooktype-property-to-basegradebook")]
+        [Fact(DisplayName = "Add Type property to BaseGradeBook")]
         [Trait("Category", "AddTypeProperty")]
         public void AddTypePropertyTest()
         {
@@ -75,45 +75,45 @@ namespace GradeBookTests
 
             // Test that the property `Type` exists in `BaseGradeBook`
             var typeProperty = typeof(BaseGradeBook).GetProperty("Type");
-            Assert.True(typeProperty != null, "`GradeBook.GradeBooks.BaseGradeBook` doesn't contain a property `Type` or `Type` is not `public`.");
+            Assert.True(typeProperty != null, "`GradeBook.GradeBooks.BaseGradeBook` doesn't contain a property `Type` or `Type` is not `public`. @add-a-gradebooktype-property-to-basegradebook");
 
             // Test that the property `Type` is of type `GradeBookType`
-            Assert.True(typeProperty.PropertyType == gradebookEnum, "`GradeBook.GradeBooks.BaseGradeBook` contains a property `Type` but it is not of type `GradeBookType`.");
+            Assert.True(typeProperty.PropertyType == gradebookEnum, "`GradeBook.GradeBooks.BaseGradeBook` contains a property `Type` but it is not of type `GradeBookType`. @add-a-gradebooktype-property-to-basegradebook");
 
             // Test that the property `Type`'s `get` method is `public`
-            Assert.True(typeProperty.GetGetMethod() != null, "`GradeBook.GradeBooks.BaseGradeBook` contains a property `Type` but it's getter is not `public`.");
+            Assert.True(typeProperty.GetGetMethod() != null, "`GradeBook.GradeBooks.BaseGradeBook` contains a property `Type` but it's getter is not `public`. @add-a-gradebooktype-property-to-basegradebook");
 
             // Test that the property `Type`'s 'set' method is `public`
-            Assert.True(typeProperty.GetSetMethod() != null, "`GradeBook.GradeBooks.BaseGradeBook` contains a property `Type` but it's setter is not `public`.");
+            Assert.True(typeProperty.GetSetMethod() != null, "`GradeBook.GradeBooks.BaseGradeBook` contains a property `Type` but it's setter is not `public`. @add-a-gradebooktype-property-to-basegradebook");
         }
 
         /// <summary>
         ///     Tests all requirements for creating the `StandardGradeBook` class.
         /// </summary>
-        [Fact(DisplayName = "Create the StandardGradeBook class @create-the-standardgradebook-class")]
+        [Fact(DisplayName = "Create the StandardGradeBook class")]
         [Trait("Category", "CreateStandardGradeBook")]
         public void CreateStandardGradeBookTest()
         {
             // Test if to make sure that `StandardGradeBook` is in the `GradeBooks` directory.
             var filePath = ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + "GradeBook" + Path.DirectorySeparatorChar + "GradeBooks" + Path.DirectorySeparatorChar + "StandardGradeBook.cs";
-            Assert.True(File.Exists(filePath), "`StandardGradeBook.cs` was not found in the `GradeBooks` folder.");
+            Assert.True(File.Exists(filePath), "`StandardGradeBook.cs` was not found in the `GradeBooks` folder. @create-the-standardgradebook-class");
 
             // Test if `StandardGradeBook` is in the `GradeBook.GradeBooks` namespace.
             var standardGradeBook = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
                                      from type in assembly.GetTypes()
                                      where type.Name == "StandardGradeBook"
                                      select type).FirstOrDefault();
-            Assert.True(standardGradeBook != null, "`GradeBook.GradeBooks.StandardGradeBook` doesn't exist.");
+            Assert.True(standardGradeBook != null, "`GradeBook.GradeBooks.StandardGradeBook` doesn't exist. @create-the-standardgradebook-class");
 
             // Test if `StandardGradeBook` is `public`.
-            Assert.True(standardGradeBook.IsPublic, "`GradeBook.GradeBooks.StandardGradeBook` isn't public");
+            Assert.True(standardGradeBook.IsPublic, "`GradeBook.GradeBooks.StandardGradeBook` isn't public. @create-the-standardgradebook-class");
 
             // Test if `StandardGradeBook` is inheritting `BaseGradeBook`.
-            Assert.True(standardGradeBook.BaseType == typeof(BaseGradeBook), "`GradeBook.GradeBooks.StandardGradeBook` doesn't inherit `BaseGradeBook`");
+            Assert.True(standardGradeBook.BaseType == typeof(BaseGradeBook), "`GradeBook.GradeBooks.StandardGradeBook` doesn't inherit `BaseGradeBook`. @create-the-standardgradebook-class");
 
             // Test if `StandardGradeBook`'s constructor has the proper signature (consider both this task and later signature)
             var ctor = standardGradeBook.GetConstructors().FirstOrDefault();
-            Assert.True(ctor != null, "No constructor found for `GradeBook.GradeBooks.StardardGradeBook`.");
+            Assert.True(ctor != null, "No constructor found for `GradeBook.GradeBooks.StardardGradeBook`. @update-standardgradebook-type");
 
             var parameters = ctor.GetParameters();
             object gradeBook = null;
@@ -121,45 +121,45 @@ namespace GradeBookTests
                 gradeBook = Activator.CreateInstance(standardGradeBook, "LoadTest", true);
             else if (parameters.Count() == 1 && parameters[0].ParameterType == typeof(string))
                 gradeBook = Activator.CreateInstance(standardGradeBook, "LoadTest");
-            Assert.True(gradeBook != null, "The constructor for `GradeBook.GradeBooks.StandardGradeBook` have the expected parameters.");
+            Assert.True(gradeBook != null, "The constructor for `GradeBook.GradeBooks.StandardGradeBook` have the expected parameters. @update-standardgradebook-type");
 
             // Test if `Type` is set to `GradeBookType.Standard`.
             var gradebookEnum = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
                                  from type in assembly.GetTypes()
                                  where type.FullName == "GradeBook.Enums.GradeBookType"
                                  select type).FirstOrDefault();
-            Assert.True(gradebookEnum != null, "`GradeBook.Enums.GradeBookType` wasn't found in the `GradeBooks.Enums` namespace.");
+            Assert.True(gradebookEnum != null, "`GradeBook.Enums.GradeBookType` wasn't found in the `GradeBooks.Enums` namespace. @update-standardgradebook-type");
 
-            Assert.True(gradeBook.GetType().GetProperty("Type").GetValue(gradeBook).ToString() == Enum.Parse(gradebookEnum, "Standard", true).ToString(), "`Type` wasn't set to `GradeBookType.Standard` by the `GradeBook.GradeBooks.StandardGradeBook` Constructor.");
+            Assert.True(gradeBook.GetType().GetProperty("Type").GetValue(gradeBook).ToString() == Enum.Parse(gradebookEnum, "Standard", true).ToString(), "`Type` wasn't set to `GradeBookType.Standard` by the `GradeBook.GradeBooks.StandardGradeBook` Constructor. @update-standardgradebook-type @standardgradebook-inherit-basegradebook");
         }
 
         /// <summary>
         ///     Tests all requirements for creating the `RankedGradeBook` class.
         /// </summary>
-        [Fact(DisplayName = "Create the RankedGradeBook class @create-the-rankedgradebook-class")]
+        [Fact(DisplayName = "Create the RankedGradeBook class")]
         [Trait("Category", "CreateRankedGradeBook")]
         public void CreateRankedGradeBookTest()
         {
             // Test if to make sure that `RankedGradeBook` is in the `GradeBooks` directory.
             var filePath = ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + "GradeBook" + Path.DirectorySeparatorChar + "GradeBooks" + Path.DirectorySeparatorChar + "RankedGradeBook.cs";
-            Assert.True(File.Exists(filePath), "`RankedGradeBook.cs` was not found in the `GradeBooks` folder.");
+            Assert.True(File.Exists(filePath), "`RankedGradeBook.cs` was not found in the `GradeBooks` folder. @create-the-rankedgradebook-class");
 
             // Test if `RankedGradeBook` is in the `GradeBook.GradeBooks` namespace.
             var rankedGradeBook = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
                                      from type in assembly.GetTypes()
                                      where type.Name == "RankedGradeBook"
                                      select type).FirstOrDefault();
-            Assert.True(rankedGradeBook != null, "`GradeBook.GradeBooks.RankedGradeBook` doesn't exist.");
+            Assert.True(rankedGradeBook != null, "`GradeBook.GradeBooks.RankedGradeBook` doesn't exist. @create-the-rankedgradebook-class");
 
             // Test if `RankedGradeBook` is `public`.
-            Assert.True(rankedGradeBook.IsPublic, "`GradeBook.GradeBooks.RankedGradeBook` isn't public");
+            Assert.True(rankedGradeBook.IsPublic, "`GradeBook.GradeBooks.RankedGradeBook` isn't public. @create-the-rankedgradebook-class");
 
             // Test if `RankedGradeBook` is inheritting `BaseGradeBook`.
-            Assert.True(rankedGradeBook.BaseType == typeof(BaseGradeBook), "`GradeBook.GradeBooks.RankedGradeBook` doesn't inherit `BaseGradeBook`");
+            Assert.True(rankedGradeBook.BaseType == typeof(BaseGradeBook), "`GradeBook.GradeBooks.RankedGradeBook` doesn't inherit `BaseGradeBook`. @create-the-rankedgradebook-class");
 
             // Test if `RankedGradeBook`'s constructor has the proper signature (consider both this task and later signature)
             var ctor = rankedGradeBook.GetConstructors().FirstOrDefault();
-            Assert.True(ctor != null, "No constructor found for GradeBook.GradeBooks.RankedGradeBook.");
+            Assert.True(ctor != null, "No constructor found for GradeBook.GradeBooks.RankedGradeBook. @update-rankedgradebook-type");
 
             var parameters = ctor.GetParameters();
             object gradeBook = null;
@@ -167,22 +167,22 @@ namespace GradeBookTests
                 gradeBook = Activator.CreateInstance(rankedGradeBook, "LoadTest", true);
             else if (parameters.Count() == 1 && parameters[0].ParameterType == typeof(string))
                 gradeBook = Activator.CreateInstance(rankedGradeBook, "LoadTest");
-            Assert.True(gradeBook != null, "The constructor for GradeBook.GradeBooks.RankedGradeBook have the expected parameters.");
+            Assert.True(gradeBook != null, "The constructor for GradeBook.GradeBooks.RankedGradeBook have the expected parameters. @update-rankedgradebook-type");
 
             // Test if `Type` is set to `GradeBookType.Ranked`.
             var gradebookEnum = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
                                  from type in assembly.GetTypes()
                                  where type.FullName == "GradeBook.Enums.GradeBookType"
                                  select type).FirstOrDefault();
-            Assert.True(gradebookEnum != null, "`GradeBook.Enums.GradeBookType` wasn't found in the `GradeBooks.Enums` namespace.");
+            Assert.True(gradebookEnum != null, "`GradeBook.Enums.GradeBookType` wasn't found in the `GradeBooks.Enums` namespace. @update-rankedgradebook-type");
 
-            Assert.True(gradeBook.GetType().GetProperty("Type").GetValue(gradeBook).ToString() == Enum.Parse(gradebookEnum, "Ranked", true).ToString(), "`Type` wasn't set to `GradeBookType.Ranked` by the `GradeBook.GradeBooks.RankedGradeBook` Constructor.");
+            Assert.True(gradeBook.GetType().GetProperty("Type").GetValue(gradeBook).ToString() == Enum.Parse(gradebookEnum, "Ranked", true).ToString(), "`Type` wasn't set to `GradeBookType.Ranked` by the `GradeBook.GradeBooks.RankedGradeBook` Constructor. @update-rankedgradebook-type @rankedgradebook-inherit-basegradebook");
         }
 
         /// <summary>
         ///     Tests all requipments for adding multiple `GradeBookType` support to `BaseGradeBook`
         /// </summary>
-        [Fact(DisplayName = "Add multiple GradeBookType support to BaseGradeBook @add-multiple-gradebooktype-support-to-basegradebook")]
+        [Fact(DisplayName = "Add multiple GradeBookType support to BaseGradeBook")]
         [Trait("Category","AddMultipleGradeBookTypeSupportToBaseGradeBook")]
         public void AddMultipleGradeBookTypeSupportToBaseGradeBookTest()
         {
@@ -190,17 +190,17 @@ namespace GradeBookTests
                                  from type in assembly.GetTypes()
                                  where type.FullName == "GradeBook.Enums.GradeBookType"
                                  select type).FirstOrDefault();
-            Assert.True(gradebookEnum != null, "GradeBook.Enums.GradeBookType doesn't exist.");
+            Assert.True(gradebookEnum != null, "GradeBook.Enums.GradeBookType doesn't exist. @create-gradebook-variable");
 
             // Test if when the `GradeBookType` is `Standard` the matching `StandardGradeBook` object is returned.
             var standardGradeBook = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
                                      from type in assembly.GetTypes()
                                      where type.Name == "StandardGradeBook"
                                      select type).FirstOrDefault();
-            Assert.True(standardGradeBook != null, "`GradeBook.GradeBooks.StandardGradeBook` doesn't exist.");
+            Assert.True(standardGradeBook != null, "`GradeBook.GradeBooks.StandardGradeBook` doesn't exist. @create-gradebook-variable");
 
             var ctor = standardGradeBook.GetConstructors().FirstOrDefault();
-            Assert.True(ctor != null, "`GradeBook.GradeBooks.StandardGradeBook` doesn't appear to have a constructor.");
+            Assert.True(ctor != null, "`GradeBook.GradeBooks.StandardGradeBook` doesn't appear to have a constructor. @create-gradebook-variable");
 
             var parameters = ctor.GetParameters();
             object gradeBook = null;
@@ -208,9 +208,9 @@ namespace GradeBookTests
                 gradeBook = Activator.CreateInstance(standardGradeBook, "LoadTest", true);
             else if (parameters.Count() == 1 && parameters[0].ParameterType == typeof(string))
                 gradeBook = Activator.CreateInstance(standardGradeBook, "LoadTest");
-            Assert.True(gradeBook != null, "The constructor for `GradeBook.GradeBooks.StandardGradeBook` doesn't have the expected parameters.");
+            Assert.True(gradeBook != null, "The constructor for `GradeBook.GradeBooks.StandardGradeBook` doesn't have the expected parameters. @create-gradebook-variable");
 
-            Assert.True(gradeBook.GetType().GetProperty("Type") != null, "`GradeBook.GradeBooks.BaseGradeBook` doesn't appear to have a `Type` property.");
+            Assert.True(gradeBook.GetType().GetProperty("Type") != null, "`GradeBook.GradeBooks.BaseGradeBook` doesn't appear to have a `Type` property. @create-gradebook-variable");
             gradeBook.GetType().GetProperty("Type").SetValue(gradeBook, Enum.Parse(gradebookEnum, "Standard", true));
 
             try
@@ -226,7 +226,7 @@ namespace GradeBookTests
             }
             catch (Exception ex)
             {
-                Assert.True(ex != null, "Test for GradeBook.GradeBooks.BaseGradeBook.Load was unable to run. This is likely due to issues being able to read/write gradebook files to the local file system.");
+                Assert.True(ex != null, "Test for GradeBook.GradeBooks.BaseGradeBook.Load was unable to run. This is likely due to issues being able to read/write gradebook files to the local file system. @create-gradebook-variable");
             }
 
             var actual = BaseGradeBook.Load("LoadTest");
